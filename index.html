@@ -216,20 +216,20 @@
                 </div>
                 <div class="column right">
                     <div class="text">Message me</div>
-                    <form action="#">
+                    <form name="submit-to-google-sheet">
                         <div class="fields">
                             <div class="field name">
-                                <input type="text" placeholder="Name" required>
+                                <input name="Name" type="text" placeholder="Name" required>
                             </div>
                             <div class="field email">
-                                <input type="email" placeholder="Email" required>
+                                <input name="Email" type="email" placeholder="Email" required>
                             </div>
                         </div>
-                        <div class="field">
+                        <!-- <div class="field">
                             <input type="text" placeholder="Subject" required>
-                        </div>
+                        </div> -->
                         <div class="field textarea">
-                            <textarea cols="30" rows="10" placeholder="Message.." required></textarea>
+                            <textarea name="Message" cols="30" rows="30" placeholder="Message" required></textarea>
                         </div>
                         <div class="button-area">
                             <button type="submit">Submit</button>
@@ -246,5 +246,18 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx52uoX-5aoc3laRZyqhniQvpGhso0nh5rr3xI2SJw3uplMXKIGf-WHrtMy7b9Xowve3A/exec'
+        const form = document.forms['submit-to-google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response))
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+
 </body>
 </html>
